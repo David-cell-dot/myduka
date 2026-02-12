@@ -29,3 +29,5 @@ def inser_products():
     cur.execute("insert into products(name,buying_price,selling_price)values('bread',50,60)")
 conn.commit()
 
+
+
