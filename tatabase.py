@@ -24,7 +24,7 @@ products=get_products()
 print(products)
 
 
-cur.excute("insert into products(name,buying_price,selling_price)values('bread',60,70)")
+#cur.excute("insert into products(name,buying_price,selling_price)values('bread',60,70)")
 conn.commit()
 print(products)
 
