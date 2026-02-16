@@ -63,29 +63,27 @@ sales=get_sales()
 print(sales)
 
 #insert sales
-curr=conn.cursor()
 def insert_sales(values):
-   query='Insert into sales (pid,quantity,created_at)values(%s,%s,now());'
-   cur.execute(query,values)
+   cur.execute(f"insert into sales(pid,quantity)values{values}")
    conn.commit()
+   sales1=(20,2)
+   sales2=(20,2)
 
-#fetch data sales per product
-# use inner join for sales and product,product is parent,child is sales
-def product_sales():
-    querry='select productname,productid,sum(selling_price*quantity) as total_sales from sales  inner join products on productid.sales=productid.products group by productname,productid;'
-    cur.execute(querry)
-    sales=cur.fetchall()
-    return sales
-mysale=product_sales()
-print(mysale)
-#sales per day
-def sales_per_day():
-    create_script='select sum (selling_price*quantity) as total_sales from sales inner join products on sales.productid=products.productid;'
-    cur.execute(create_script)
-    sales=cur.fetchall()
-    return sales
-sales=sales_per_day()
-print(sales)
+   insert_sales(sales1)
+   insert_sales(sales2)
+
+   
+   
+
+
+
+
+
+
+
+
+
+  
 
 
 
