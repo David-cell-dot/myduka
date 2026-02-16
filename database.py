@@ -16,12 +16,20 @@ print(data)
 
 
 def get_products():
-    cur.execute("select*from products")
+    cur.execute("select*from products;")
     products=cur.fetchall()
     return products
 
 products=get_products()
 print(products)
+
+
+def fetch_stock():
+    cur.execute("select*from stock;")
+    stock=cur.fetchall()
+    return stock
+stock1=fetch_stock()
+print(stock1)
 
 
 cur.execute("insert into products(name,buying_price,selling_price)values('bread',50,60)")
@@ -46,7 +54,40 @@ insert_products(product1)
 insert_products(product2)
 
 
+#fetch data fro sales
+def get_sales():
+    cur.execute("select*from sales;")
+    sales=cur.fetchall()
+    return sales
+sales=get_sales()
+print(sales)
 
-#task
+#insert sales
+curr=conn.cursor()
+def insert_sales(values):
+   query='Insert into sales (pid,quantity,created_at)values(%s,%s,now());'
+   cur.execute(query,values)
+   conn.commit()
+
+#fetch data sales per product
+# use inner join for sales and product,product is parent,child is sales
+def product_sales():
+    querry="select*from sales inner join products on productid.product=product id.sales;"
+    querry='select productname,productid,sum(selling_price*quantity) as total_sales from sales as inner join products on productid.sales=productid.products group by productname,productid;'
+    cur.execute(querry)
+    sales=cur.fetchall()
+    return sales
+sales_per_product=product_sales()
+print(sales_per_product)
+
+#sales per day
+def sales_per_day():
+    create_script='select sum (selling_price*quantity) as total_sales from sales inner join products on sales.productid=products.productid;'
+    cur.execute(create_script)
+    sales=cur.fetchall()
+    return sales
+sales=sales_per_day()
+print(sales)
+
 
 
