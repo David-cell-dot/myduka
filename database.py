@@ -71,18 +71,16 @@ def insert_sales(values):
 
    insert_sales(sales1)
    insert_sales(sales2)
-
    
-   
+def get_sales_per_product():
+    cur.execute('''
+                select products.name as p_name,sum(products.selling_price*quantity)as total_sales from products join sales on sales.pid=products.id group by (p_name);
+                ''')
+    sales_per_product=cur.fetchall()
+    return get_sales_per_product
 
-
-
-
-
-
-
-
-
+sales_per_product=get_sales_per_product()
+print(sales_per_product)
   
 
 
